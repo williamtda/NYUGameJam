@@ -96,15 +96,15 @@ function create() {
 
 function update() {
 
-    //  Collide the player and the homeworks with the platforms
+    //  Collide the player and the homework with the platforms
     game.physics.arcade.collide(player, platforms);
-    game.physics.arcade.collide(homeworks, platforms);
+    game.physics.arcade.collide(homework, platforms);
 
     //  Checks to see if the player overlaps with any of the homeworks, if he does call the collecthomework function
-    game.physics.arcade.overlap(player, homeworks, collectHomework, null, this);
+    game.physics.arcade.overlap(player, homework, collectHomework, null, this);
 
 	// CHANGE: tests
-	game.physics.arcade.overlap(player, tests, collectTest, null, this);
+	game.physics.arcade.overlap(player, aTest, collectTest, null, this);
 
 	
     //  Reset the players velocity (movement)
@@ -141,19 +141,31 @@ function update() {
 }
 
 function createHomework() {
+	if(homework.kill()){
+	}
+	
+	var homeworkFall = Math.random()*10*70 + 1; // Falls between 70 and width - 70 px
+	// The player and its settings
+    homework = game.add.sprite(homeworkFall, 0, 'homework');
 
+    //  We need to enable physics on the player
+    game.physics.arcade.enable(homework);
+	
+	homework.body.gravity.y = 300;
+
+	/*
 	//  Finally some homeworks to collect
     homeworks = game.add.group();
 
     //  We will enable physics for any homework that is created in this group
     homeworks.enableBody = true;
 	
-	var homeworkFall = Math.random()*10*70 + 1; // Falls between 70 and width - 70 px
+	
 	
 	var homework = homeworks.create(homeworkFall,0,'homework');
 	homework.body.gravity.y = 300;
 
-	/*
+	
     //  Here we'll create 12 of them evenly spaced apart
     for (var i = 0; i < 12; i++)
     {
@@ -171,6 +183,8 @@ function createHomework() {
 }
 
 function createTest() {
+	if(aTest.kill()){
+	}
 
 	//  Finally some tests to collect
     tests = game.add.group();
@@ -186,10 +200,8 @@ function createTest() {
 
 }
 
-
-function halfTime(homework, tests){
-	homeworks.destroy();
-	tests.destroy();
+function halfTime(homework){
+	
 	createTest();
 	game.time.events.repeat(Phaser.Timer.SECOND * 5, 2, createHomework, this);
 }
