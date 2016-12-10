@@ -44,14 +44,14 @@ function create() {
 	//Platforms 
 	this.platforms = this.add.physicsGroup();
 
-   this.platforms.create(0, 64, 'platform');
-   this.platforms.create(200, 180, 'platform');
-   this.platforms.create(400, 296, 'platform');
-   this.platforms.create(600, 412, 'platform');
+this.platforms.create(0, 64, 'gorund');
+this.platforms.create(200, 180, 'ground');
+this.platforms.create(400, 296, 'ground');
+this.platforms.create(600, 412, 'ground');
 
-     this.platforms.setAll('body.allowGravity', false);
-     this.platforms.setAll('body.immovable', true);
-     this.platforms.setAll('body.velocity.x', 100);
+this.platforms.setAll('body.allowGravity', false);
+this.platforms.setAll('body.immovable', true);
+this.platforms.setAll('body.velocity.x', 100);
 	
 
     //  Now let's create two ledges
