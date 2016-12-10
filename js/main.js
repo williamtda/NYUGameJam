@@ -5,7 +5,8 @@ function preload() {
     game.load.image('sky', 'assets/sky.png');
     game.load.image('ground', 'assets/platform.png');
     game.load.image('homework', 'assets/homework.png');
-    game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32, 4);
+    game.load.spritesheet('baddie', 'assets/betty.png', 48, 48, 16);
+	
 
 }
 
@@ -59,8 +60,8 @@ function create() {
     player.body.collideWorldBounds = true;
 
     //  Our two animations, walking left and right.
-    player.animations.add('left', [0, 1], 4, true);
-	player.animations.add('right', [2, 3], 4, true);
+    player.animations.add('left', [1, 5, 9, 13], 16, true);
+	player.animations.add('right', [3, 7, 11, 15], 16, true);
 
     //  Finally some homeworks to collect
     homeworks = game.add.group();
