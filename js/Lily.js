@@ -188,8 +188,8 @@ function createTest() {
 
 
 function halfTime(homework, tests){
-	homeworks.kill();
-	tests.kill();
+	homeworks.destroy();
+	tests.destroy();
 	createTest();
 	game.time.events.repeat(Phaser.Timer.SECOND * 5, 2, createHomework, this);
 }
