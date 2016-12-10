@@ -20,7 +20,7 @@ function preload() {
 
     game.load.image('sky', 'assets/sky.png');
     game.load.image('ground', 'assets/platform.png');
-    game.load.image('mouse', 'assets/mouse.png');
+    game.load.image('homework', 'assets/homework.png');
     game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32, 4);
 
 }
@@ -29,7 +29,7 @@ var player;
 var platforms;
 var cursors;
 
-var mice;
+var homeworks;
 var score = 0;
 var scoreText;
 
@@ -78,23 +78,23 @@ function create() {
     player.animations.add('left', [0, 1], 4, true);
 	player.animations.add('right', [2, 3], 4, true);
 
-    //  Finally some mice to collect
-    mice = game.add.group();
+    //  Finally some homeworks to collect
+    homeworks = game.add.group();
 
-    //  We will enable physics for any mouse that is created in this group
-    mice.enableBody = true;
+    //  We will enable physics for any homework that is created in this group
+    homeworks.enableBody = true;
 
     //  Here we'll create 12 of them evenly spaced apart
     for (var i = 0; i < 12; i++)
     {
-        //  Create a mice inside of the 'mouse' group
-        var mouse = mice.create(i * 70, 0, 'mouse');
+        //  Create a homeworks inside of the 'homework' group
+        var homework = homeworks.create(i * 70, 0, 'homework');
 
         //  Let gravity do its thing
-        mouse.body.gravity.y = 300;
+        homework.body.gravity.y = 300;
 
-        //  This just gives each mice a slightly random bounce value
-        mouse.body.bounce.y = 0.7 + Math.random() * 0.2;
+        //  This just gives each homeworks a slightly random bounce value
+        homework.body.bounce.y = 0.7 + Math.random() * 0.2;
     }
 
     //  The score
@@ -107,12 +107,12 @@ function create() {
 
 function update() {
 
-    //  Collide the player and the mice with the platforms
+    //  Collide the player and the homeworks with the platforms
     game.physics.arcade.collide(player, platforms);
-    game.physics.arcade.collide(mice, platforms);
+    game.physics.arcade.collide(homeworks, platforms);
 
-    //  Checks to see if the player overlaps with any of the mice, if he does call the collectMouse function
-    game.physics.arcade.overlap(player, mice, collectMouse, null, this);
+    //  Checks to see if the player overlaps with any of the homeworks, if he does call the collecthomework function
+    game.physics.arcade.overlap(player, homeworks, collectHomework, null, this);
 
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
@@ -147,10 +147,10 @@ function update() {
 
 }
 
-function collectMouse (player, mouse) {
+function collectHomework (player, homework) {
     
-    // Removes the mouse from the screen
-    mouse.kill();
+    // Removes the homework from the screen
+    homework.kill();
 
     //  Add and update the score
     score += 10;
