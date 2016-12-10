@@ -28,8 +28,8 @@ function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  A simple background for our game
-    game.add.sprite(0, 0, 'sky');
-	var school = game.add.titleSprite(0, 0, 'school')
+    var sky = game.add.sprite(0, 0, 'sky');
+	var school = game.add.tileSprite(0, 0, 'school')
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
