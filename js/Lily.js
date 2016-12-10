@@ -103,6 +103,10 @@ function update() {
     //  Checks to see if the player overlaps with any of the homeworks, if he does call the collecthomework function
     game.physics.arcade.overlap(player, homeworks, collectHomework, null, this);
 
+	// CHANGE: tests
+	game.physics.arcade.overlap(player, tests, collectTest, null, this);
+
+	
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
 
@@ -144,7 +148,7 @@ function createHomework() {
     //  We will enable physics for any homework that is created in this group
     homeworks.enableBody = true;
 	
-	var homeworkFall = (Math.round(Math.random()*10) + 1)*70; // Falls between 70 and width - 70 px
+	var homeworkFall = Math.random()*10*70 + 1; // Falls between 70 and width - 70 px
 	
 	var homework = homeworks.create(homeworkFall,0,'homework');
 	homework.body.gravity.y = 300;
@@ -174,10 +178,10 @@ function createTest() {
     //  We will enable physics for any test that is created in this group
     tests.enableBody = true;
 	
-	var testFall = (Math.round(Math.random()*10) + 1)*70; // Falls between 70 and width - 70 px
+	var testFall = Math.random()*10*70 + 1; // Falls between 70 and width - 70 px
 	
 	var aTest = tests.create(testFall,0,'test');
-	aTest.body.gravity.y = 300; // TODO: make it fall faster
+	aTest.body.gravity.y = 100; // TODO: make it fall slower
 
 
 }
