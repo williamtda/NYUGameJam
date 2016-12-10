@@ -142,7 +142,7 @@ function update() {
 
 function createHomework() {
 	try {
-		homework.kill()
+		homework.kill();
 	} catch (err){
 		
 	}
@@ -187,7 +187,7 @@ function createHomework() {
 
 function createTest() {
 	try {
-		aTest.kill()
+		aTest.kill();
 	} catch (err){
 		
 	}
