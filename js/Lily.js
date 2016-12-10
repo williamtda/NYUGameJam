@@ -144,7 +144,7 @@ function createHomework() {
     //  We will enable physics for any homework that is created in this group
     homeworks.enableBody = true;
 	
-	var homeworkFall = ((int) Math.random()*10 + 1)*70; // Falls between 70 and width - 70 px
+	var homeworkFall = (Math.round(Math.random()*10) + 1)*70; // Falls between 70 and width - 70 px
 	
 	var homework = homeworks.create(homeworkFall,0,'homework');
 	homework.body.gravity.y = 300;
