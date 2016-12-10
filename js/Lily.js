@@ -174,7 +174,7 @@ function createTest() {
     //  We will enable physics for any homework that is created in this group
     tests.enableBody = true;
 	
-	var testFall = ((int) Math.random()*8 + 1)*70; // Falls between 70 and width - 70 px
+	var testFall = (Math.round(Math.random()*10) + 1)*70; // Falls between 70 and width - 70 px
 	
 	var aTest = tests.create(homeworkFall,0,'test');
 	aTest.body.gravity.y = 300; // TODO: make it fall faster
