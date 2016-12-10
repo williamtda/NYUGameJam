@@ -5,8 +5,9 @@ function preload() {
     game.load.image('sky', 'assets/sky.png');
     game.load.image('ground', 'assets/platform.png');
     game.load.image('homework', 'assets/homework.png');
-    game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32, 4);
+   // game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32, 4);
 	game.load.image('test','assets/test.png');
+	 game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);
 
 }
 
@@ -52,7 +53,7 @@ function create() {
     ledge.body.immovable = true;
 
     // The player and its settings
-    player = game.add.sprite(32, game.world.height - 150, 'baddie');
+    player = game.add.sprite(32, game.world.height - 150, 'betty');
 
     //  We need to enable physics on the player
     game.physics.arcade.enable(player);
@@ -155,33 +156,6 @@ function createHomework() {
     game.physics.arcade.enable(homework);
 	
 	homework.body.gravity.y = 300;
-
-	/*
-	//  Finally some homeworks to collect
-    homeworks = game.add.group();
-
-    //  We will enable physics for any homework that is created in this group
-    homeworks.enableBody = true;
-	
-	
-	
-	var homework = homeworks.create(homeworkFall,0,'homework');
-	homework.body.gravity.y = 300;
-
-	
-    //  Here we'll create 12 of them evenly spaced apart
-    for (var i = 0; i < 12; i++)
-    {
-        //  Create a homeworks inside of the 'homework' group
-        var homework = homeworks.create(i * 70, 0, 'homework');
-
-        //  Let gravity do its thing
-        homework.body.gravity.y = 300;
-
-        //  This just gives each homeworks a slightly random bounce value
-        homework.body.bounce.y = 0.7 + Math.random() * 0.2;
-    }
-	*/
 
 }
 
