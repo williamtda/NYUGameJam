@@ -14,12 +14,12 @@ var player;
 var platforms;
 var cursors;
 
-var homeworks;
+var homework;
 var score = 0;
 var scoreText;
 
 //CHANGE
-var tests;
+var aTest;
 
 function create() {
 
@@ -141,7 +141,10 @@ function update() {
 }
 
 function createHomework() {
-	if(homework.kill()){
+	try {
+		homework.kill()
+	} catch (err){
+		
 	}
 	
 	var homeworkFall = Math.random()*10*70 + 1; // Falls between 70 and width - 70 px
@@ -183,9 +186,22 @@ function createHomework() {
 }
 
 function createTest() {
-	if(aTest.kill()){
+	try {
+		aTest.kill()
+	} catch (err){
+		
 	}
 
+	var testFall = Math.random()*10*70 + 1; // Falls between 70 and width - 70 px
+	// The player and its settings
+    aTest = game.add.sprite(testFall, 0, 'test');
+
+    //  We need to enable physics on the player
+    game.physics.arcade.enable(aTest);
+	
+	aTest.body.gravity.y = 300;
+	
+	/*
 	//  Finally some tests to collect
     tests = game.add.group();
 
@@ -196,7 +212,7 @@ function createTest() {
 	
 	var aTest = tests.create(testFall,0,'test');
 	aTest.body.gravity.y = 100; // TODO: make it fall slower
-
+	*/
 
 }
 
