@@ -176,7 +176,7 @@ function createTest() {
 	
 	var testFall = (Math.round(Math.random()*10) + 1)*70; // Falls between 70 and width - 70 px
 	
-	var aTest = tests.create(homeworkFall,0,'test');
+	var aTest = tests.create(testFall,0,'test');
 	aTest.body.gravity.y = 300; // TODO: make it fall faster
 
 	/*
