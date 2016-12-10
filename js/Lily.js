@@ -64,8 +64,8 @@ function create() {
     player.body.collideWorldBounds = true;
 
     //  Our two animations, walking left and right.
-    player.animations.add('left', [0, 1], 4, true);
-	player.animations.add('right', [2, 3], 4, true);
+ player.animations.add('left', [1, 5, 9, 13], 16, true);
+	player.animations.add('right', [3, 7, 11, 15], 16, true);
 
     //CHANGE : moved hw
 
