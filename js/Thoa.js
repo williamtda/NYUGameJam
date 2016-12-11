@@ -29,8 +29,7 @@ function create() {
 
     //add sound
 	sound = new Phaser.Sound(game, 'music', 1, true);
-	sound.play();
-	//being mp3 file this takes time to decode, so we can't play them instantly
+	sound.autoplay() = true;
 	
 	//  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
