@@ -11,7 +11,7 @@ function preload() {
 	 game.load.image('school', 'assets/school.png');
 	 
 	//add sound
-	game.load.audio('music', 'assets/How_It_Began.mp3'); 
+	game.load.audio('music', 'assets/audio/How_It_Began.mp3'); 
 
 }
 
