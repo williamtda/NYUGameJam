@@ -3,11 +3,12 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create
 function preload() {
 
     game.load.image('sky', 'assets/sky.png');
-	game.load.image('school', 'assets/school.png');
     game.load.image('ground', 'assets/platform.png');
     game.load.image('homework', 'assets/homework.png');
-    game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32, 4);
+   // game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32, 4);
 	game.load.image('test','assets/test.png');
+	 game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);
+	 game.load.image('school', 'assets/school.png');
 
 }
 
@@ -15,12 +16,12 @@ var player;
 var platforms;
 var cursors;
 
-var homeworks;
+var homework;
 var score = 0;
 var scoreText;
 
 //CHANGE
-var tests;
+var aTest;
 
 function create() {
 
@@ -54,7 +55,7 @@ function create() {
     ledge.body.immovable = true;
 
     // The player and its settings
-    player = game.add.sprite(32, game.world.height - 150, 'baddie');
+    player = game.add.sprite(32, game.world.height - 150, 'betty');
 
     //  We need to enable physics on the player
     game.physics.arcade.enable(player);
@@ -65,8 +66,8 @@ function create() {
     player.body.collideWorldBounds = true;
 
     //  Our two animations, walking left and right.
-    player.animations.add('left', [0, 1], 4, true);
-	player.animations.add('right', [2, 3], 4, true);
+ player.animations.add('left', [1, 5, 9, 13], 16, true);
+	player.animations.add('right', [3, 7, 11, 15], 16, true);
 
     //CHANGE : moved hw
 
@@ -98,15 +99,15 @@ function create() {
 
 function update() {
 
-    //  Collide the player and the homeworks with the platforms
+    //  Collide the player and the homework with the platforms
     game.physics.arcade.collide(player, platforms);
-    game.physics.arcade.collide(homeworks, platforms);
+    game.physics.arcade.collide(homework, platforms);
 
     //  Checks to see if the player overlaps with any of the homeworks, if he does call the collecthomework function
-    game.physics.arcade.overlap(player, homeworks, collectHomework, null, this);
+    game.physics.arcade.overlap(player, homework, collectHomework, null, this);
 
 	// CHANGE: tests
-	game.physics.arcade.overlap(player, tests, collectTest, null, this);
+	game.physics.arcade.overlap(player, aTest, collectTest, null, this);
 
 	
     //  Reset the players velocity (movement)
@@ -119,7 +120,6 @@ function update() {
 
         player.animations.play('left');
 		school.tilePosition.x+= 5;
-		
     }
     else if (cursors.right.isDown)
     {
@@ -146,37 +146,40 @@ function update() {
 }
 
 function createHomework() {
-
-	//  Finally some homeworks to collect
-    homeworks = game.add.group();
-
-    //  We will enable physics for any homework that is created in this group
-    homeworks.enableBody = true;
+	try {
+		homework.kill();
+	} catch (err){
+		
+	}
 	
 	var homeworkFall = Math.random()*10*70 + 1; // Falls between 70 and width - 70 px
+	// The player and its settings
+    homework = game.add.sprite(homeworkFall, 0, 'homework');
+
+    //  We need to enable physics on the player
+    game.physics.arcade.enable(homework);
 	
-	var homework = homeworks.create(homeworkFall,0,'homework');
 	homework.body.gravity.y = 300;
-
-	/*
-    //  Here we'll create 12 of them evenly spaced apart
-    for (var i = 0; i < 12; i++)
-    {
-        //  Create a homeworks inside of the 'homework' group
-        var homework = homeworks.create(i * 70, 0, 'homework');
-
-        //  Let gravity do its thing
-        homework.body.gravity.y = 300;
-
-        //  This just gives each homeworks a slightly random bounce value
-        homework.body.bounce.y = 0.7 + Math.random() * 0.2;
-    }
-	*/
 
 }
 
 function createTest() {
+	try {
+		aTest.kill();
+	} catch (err){
+		
+	}
 
+	var testFall = Math.random()*10*70 + 1; // Falls between 70 and width - 70 px
+	// The player and its settings
+    aTest = game.add.sprite(testFall, 0, 'test');
+
+    //  We need to enable physics on the player
+    game.physics.arcade.enable(aTest);
+	
+	aTest.body.gravity.y = 300;
+	
+	/*
 	//  Finally some tests to collect
     tests = game.add.group();
 
@@ -187,12 +190,12 @@ function createTest() {
 	
 	var aTest = tests.create(testFall,0,'test');
 	aTest.body.gravity.y = 100; // TODO: make it fall slower
-
+	*/
 
 }
 
-
-function halfTime(){
+function halfTime(homework){
+	
 	createTest();
 	game.time.events.repeat(Phaser.Timer.SECOND * 5, 2, createHomework, this);
 }
