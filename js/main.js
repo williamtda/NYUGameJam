@@ -9,6 +9,9 @@ function preload() {
 	game.load.image('test','assets/test.png');
 	 game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);
 	 game.load.image('school', 'assets/school.png');
+	 
+	//add sound
+	game.load.audio('music', 'assets/How_It_Began.mp3'); 
 
 }
 
@@ -23,9 +26,16 @@ var scoreText;
 //CHANGE
 var aTest;
 
+//add sound
+var sound;
+
 function create() {
 
-    //  We're going to be using physics, so enable the Arcade Physics system
+    //add sound
+	sound = new Phaser.Sound(game, 'music', 1, true);
+	sound.autoplay() = true;
+	
+	//  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  A simple background for our game
