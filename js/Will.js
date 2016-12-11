@@ -19,6 +19,7 @@ var cursors;
 var homework;
 var score = 0;
 var scoreText;
+var timeLeft;
 
 //CHANGE
 var aTest;
@@ -73,6 +74,7 @@ function create() {
 
     //  The score
     scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+	timerext = game.add.text(game.world.width - 50, 16, 'Time: 3', { fontSize: '32px', fill: '#000' });
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
