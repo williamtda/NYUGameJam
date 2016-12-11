@@ -8,6 +8,8 @@ function preload() {
 	game.load.image('test', 'assets/test.png');
     game.load.spritesheet('baddie', 'assets/betty.png', 48, 48, 16);
 	
+	//add sound
+	game.load.audio('music', 'assets/How_It_Began.mp3');
 
 }
 
@@ -20,9 +22,17 @@ var tests;
 var score = 0;
 var scoreText;
 
+//add sound
+var sound;
+
 function create() {
 
-    //  We're going to be using physics, so enable the Arcade Physics system
+    //add sound
+	sound = new Phaser.Sound(game, 'music', 1, true);
+	sound.play();
+	//being mp3 file this takes time to decode, so we can't play them instantly
+	
+	//  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  A simple background for our game
@@ -98,6 +108,8 @@ function create() {
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
+	
+	new Sound()
     
 }
 
