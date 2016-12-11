@@ -32,8 +32,10 @@ var sound;
 function create() {
 
     //add sound
-	sound = new Phaser.Sound(game, 'music', 1, true);
-	sound.autoplay() = true;
+	game.input.touch.preventDefault = false;
+	sound = game.add.audio('music');
+	sound.play();
+	game.input.onDown.add(restartMusic, this);
 	
 	//  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -107,6 +109,11 @@ function create() {
 	game.time.events.add(Phaser.Timer.SECOND * 29, createTest, this);
 }
 
+function restartMusic() {
+	
+	sound.restart();
+	
+}
 function update() {
 
     //  Collide the player and the homework with the platforms
@@ -212,7 +219,10 @@ function halfTime(homework){
 
 function render() {
 
-    game.debug.text("Time until event: " + game.time.events.duration.toFixed(0), 32, 32);
+    //sound-related
+	game.debug.soundInfo(sound, 20, 32);
+	
+	game.debug.text("Time until event: " + game.time.events.duration.toFixed(0), 32, 32);
     game.debug.text("Next tick: " + game.time.events.next.toFixed(0), 32, 64);
 
 }
