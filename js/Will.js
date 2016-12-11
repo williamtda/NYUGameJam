@@ -29,7 +29,7 @@ function create() {
 
     //  A simple background for our game
     game.add.sprite(0, 0, 'sky');
-	school = game.add.tileSprite(0, 0, 800, 600, 'school')
+	school = game.add.tileSprite(0, 0, 800, 600, 'school');
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();

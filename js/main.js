@@ -8,6 +8,7 @@ function preload() {
    // game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32, 4);
 	game.load.image('test','assets/test.png');
 	 game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);
+	 game.load.image('school', 'assets/school.png');
 
 }
 
@@ -29,6 +30,7 @@ function create() {
 
     //  A simple background for our game
     game.add.sprite(0, 0, 'sky');
+	school = game.add.tileSprite(0, 0, 800, 600, 'school');
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
@@ -117,6 +119,7 @@ function update() {
         player.body.velocity.x = -150;
 
         player.animations.play('left');
+		school.tilePosition.x+= 5;
     }
     else if (cursors.right.isDown)
     {
@@ -124,6 +127,7 @@ function update() {
         player.body.velocity.x = 150;
 
         player.animations.play('right');
+		school.tilePosition.x-=5;
     }
     else
     {
