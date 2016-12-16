@@ -9,7 +9,7 @@ function preload() {
 	game.load.image('test','assets/test.png');
 	 game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);
 	 
-	  game.load.image('menu', 'assets/blackbox.jpeg', 270, 180);
+	  game.load.image('menu', 'assets/blackbox.jpeg', 360, 360);
 
 }
 
@@ -96,15 +96,15 @@ function create() {
 	//  AT 29 SECONDS
 	game.time.events.add(Phaser.Timer.SECOND * 29, createTest, this);
 	
-	game.time.events.add(Phaser.Timer.SECOND * 30, endGame, this);
+	game.time.events.add(Phaser.Timer.SECOND * 5, endGame, this); // Testing purposes only
 }
 
 function endGame() {
-	// When the paus button is pressed, we pause the game
+	// When the pause button is pressed, we pause the game
         game.paused = true;
 
         // Then add the menu
-        menu = game.add.sprite(w/2, h/2, 'menu');
+        var menu = game.add.sprite(w/2, h/2, 'menu');
         menu.anchor.setTo(0.5, 0.5);
 		var endMessage = "GRADE:"+score;
 		if (score < 60){
@@ -114,8 +114,10 @@ function endGame() {
 		
 
         // And a label to illustrate which menu item was chosen. (This is not necessary)
-        choiseLabel = game.add.text(w/2, h-150, 'Click here to restart', { font: '30px Arial', fill: '#fff' });
+        var choiseLabel = game.add.text(w/2, h-150, 'Click here to restart', { font: '30px Arial', fill: '#fff' });
         //choiseLabel.anchor.setTo(0.5, 0.5);
+		
+		
 		
 		// Calculate the corners of the menu
             var x1 = w/2 - 270/2, x2 = w/2 + 270/2,
