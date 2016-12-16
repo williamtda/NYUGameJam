@@ -141,7 +141,7 @@ function update() {
     //  Collide the player and the homework with the platforms
     game.physics.arcade.collide(player, platforms);
     if (game.physics.arcade.collide(homework, platforms)){
-		homework.value = 10;
+		homework.points = 10;
 	}
 
     //  Checks to see if the player overlaps with any of the homeworks, if he does call the collecthomework function
