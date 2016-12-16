@@ -119,7 +119,10 @@ function endGame() {
 	choiseLabel.anchor.setTo(0.5, 0.5);
 	
 	// Add a input listener that can help us return from being paused
-    game.input.onDown.add(location.reload(), self);
+    game.input.onDown.add(restart, self);
+	function restart(event){
+		location.reload();
+	}
 }
 
 function update() {
