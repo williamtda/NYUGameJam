@@ -128,8 +128,8 @@ function endGame() {
         // Only act if paused
         if(game.paused){
             // Calculate the corners of the menu
-            var x1 = w/2 - 270/2, x2 = w/2 + 270/2,
-                y1 = h/2 - 180/2, y2 = h/2 + 180/2;
+            var x1 = w/2 - menu.width/2, x2 = w/2 + menu.width/2,
+                y1 = h/2 - menu.height/2, y2 = h/2 + menu.width/2;
 
             // Check if the click was inside the menu
             if(event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2 ){
