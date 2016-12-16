@@ -9,7 +9,7 @@ function preload() {
    // game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32, 4);
 	game.load.image('test','assets/test.png');
 	game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);	 
-	game.load.image('menu', 'assets/blackbox.jpeg', 360, 360);
+	game.load.image('menu', 'assets/blackbox.png', 360, 360);
 }
 
 var player;
