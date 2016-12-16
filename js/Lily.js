@@ -1,6 +1,23 @@
+var wfconfig = {
+ 
+    active: function() { 
+        console.log("font loaded");
+        init();
+    },
+ 
+    google: {
+        families: ['Sniglet']
+    }
+ 
+};
+ 
+WebFont.load(wfconfig);
+
+var init() = function () {
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
+/*
 //  The Google WebFont Loader will look for this object, so create it before loading the script.
 WebFontConfig = {
 
@@ -16,8 +33,10 @@ WebFontConfig = {
 
 };
 
-function empty(){}
-
+function empty(){
+	console.log("Hopefully all fonts loaded");
+}
+*/
 function preload() {
 
     game.load.image('sky', 'assets/sky.png');
@@ -270,4 +289,5 @@ function collectTest (player, aTest) {
     score += 20;
     scoreText.text = 'Score: ' + score;
 
+}
 }
