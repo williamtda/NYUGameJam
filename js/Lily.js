@@ -153,7 +153,7 @@ function update() {
 	}
 	
 	if (superMode == true){
-		updateSuperPlayer;
+		updateSuperPlayer();
 	} else {
 		updatePlayer();
 	}
