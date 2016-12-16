@@ -107,7 +107,7 @@ function create() {
     game.time.events.add(Phaser.Timer.SECOND * 15, halfTime, this);
 	
 	//  AT 30 SECONDS
-	game.time.events.add(Phaser.Timer.SECOND * 30 createTest, this);
+	game.time.events.add(Phaser.Timer.SECOND * 30, createTest, this);
 	
 	//  AT 35 SECONDS
 	game.time.events.add(Phaser.Timer.SECOND * 35, endGame, this); // Testing purposes only
