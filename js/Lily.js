@@ -17,6 +17,10 @@ function preload() {
 
 }
 
+var superMode = false;
+var superKey = Z;
+var key;
+
 var player;
 var platforms;
 var cursors;
@@ -32,6 +36,7 @@ var aTest;
 var sound;
 
 function create() {
+	key = game.input.keyboard.addKey(Phaser.Keyboard.superKey);
 
     //add sound
 	game.input.touch.preventDefault = false;
@@ -80,7 +85,7 @@ function create() {
     player.body.collideWorldBounds = true;
 
     //  Our two animations, walking left and right.
- player.animations.add('left', [1, 5, 9, 13], 16, true);
+	player.animations.add('left', [1, 5, 9, 13], 16, true);
 	player.animations.add('right', [3, 7, 11, 15], 16, true);
 
     //CHANGE : moved hw
@@ -129,33 +134,7 @@ function returnGrade(score){
 }
 
 function restartMusic() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
 	sound.restart();
-	
-
-
-
-
-
 }
 
 function update() {
@@ -170,8 +149,53 @@ function update() {
 	// CHANGE: tests
 	game.physics.arcade.overlap(player, aTest, collectTest, null, this);
 
+	if (cursors.superKey.isDown){
+		superMode = true;
+	}
 	
-    //  Reset the players velocity (movement)
+	if (superMode == true){
+		updateSuperPlayer;
+	} else {
+		updatePlayer();
+	}
+    
+}
+
+function updateSuperPlayer() {
+	player.body.velocity.x = 0;
+	if (cursors.left.isDown)
+    {
+        //  Move to the left
+        player.body.velocity.x = -200;
+
+        player.animations.play('left');
+		school.tilePosition.x+= 5;
+    }
+    else if (cursors.right.isDown)
+    {
+        //  Move to the right
+        player.body.velocity.x = 200;
+
+        player.animations.play('right');
+		school.tilePosition.x-=5;
+    }
+    else
+    {
+        //  Stand still
+        player.animations.stop();
+
+        player.frame = 4;
+    }
+    
+    //  Allow the player to jump
+    if (cursors.up.isDown)
+    {
+        player.body.velocity.y = -400;
+    }
+}
+
+function updatePlayer() {
+	//  Reset the players velocity (movement)
     player.body.velocity.x = 0;
 
     if (cursors.left.isDown)
@@ -203,9 +227,7 @@ function update() {
     {
         player.body.velocity.y = -350;
     }
-
 }
-
 
 
 function createHomework() {
