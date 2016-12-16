@@ -115,7 +115,7 @@ function create() {
 	game.time.events.add(Phaser.Timer.SECOND * 30, createTest, this);
 	
 	//  AT 35 SECONDS
-	game.time.events.add(Phaser.Timer.SECOND * 35, endGame, this); // Testing purposes only
+	game.time.events.add(Phaser.Timer.SECOND * 33, endGame, this); // Testing purposes only
 }
 
 function returnGrade(score){
@@ -193,7 +193,7 @@ function updateSuperPlayer() {
     }
 	else if (cursors.down.isDown)
 	{
-		player.body.velocity.y = 400;
+		player.body.velocity.y += 300;
 	}
 }
 
