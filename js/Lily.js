@@ -149,7 +149,7 @@ function update() {
 	// CHANGE: tests
 	game.physics.arcade.overlap(player, aTest, collectTest, null, this);
 
-	if (cursors.superKey.isDown){
+	if (cursors.key.isDown){
 		superMode = true;
 	}
 	
