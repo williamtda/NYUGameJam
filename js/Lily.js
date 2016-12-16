@@ -98,6 +98,20 @@ function create() {
 	game.time.events.add(Phaser.Timer.SECOND * 5, endGame, this); // Testing purposes only
 }
 
+function returnGrade(score){
+	if (score > = 90){
+		return "A";
+	} else if (score >= 80){
+		return "B";
+	} else if (score >= 70){
+		return "C";
+	} else if (score >= 60){
+		return "D";
+	} else {
+		return "F";
+	}
+}
+
 function endGame() {
 	// When the pause button is pressed, we pause the game
     game.paused = true;
@@ -107,15 +121,15 @@ function endGame() {
 	// Then add the menu
 	var menu = game.add.sprite(w/2, h/2, 'menu');
 	menu.anchor.setTo(0.5, 0.5);
-	var endMessage = "GRADE: "+score;
+	var endMessage = "GRADE: "+returnGrade();
 	if (score < 60){
-		endMessage = endMessage+ " YOU FAILED!"; 
+		endMessage = endMessage+ "\nYOU FAILED!"; 
 	}
 	var endText = game.add.text(game.world.centerX, game.world.centerY, endMessage,{fill: '#fff' });
 	endText.anchor.setTo(0.5,0.5);
 
 	// And a label to illustrate which menu item was chosen. (This is not necessary)
-	var choiseLabel = game.add.text(game.world.centerX, game.world.centerY + menu.height/2+10, 'Click here to restart', {fill: '#fff' });
+	var choiseLabel = game.add.text(game.world.centerX, game.world.centerY + menu.height/2+30, 'Click here to restart', {fill: '#fff' });
 	choiseLabel.anchor.setTo(0.5, 0.5);
 	
 	// Add a input listener that can help us return from being paused
