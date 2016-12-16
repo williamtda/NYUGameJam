@@ -18,7 +18,7 @@ function preload() {
 }
 
 var superMode = false;
-var superKey = Z;
+var superKey = "Z";
 var key;
 
 var player;
