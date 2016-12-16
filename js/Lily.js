@@ -99,7 +99,7 @@ function create() {
 }
 
 function returnGrade(score){
-	if (score > = 90){
+	if (score >= 90){
 		return "A";
 	} else if (score >= 80){
 		return "B";
