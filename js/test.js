@@ -278,19 +278,19 @@ function endGame() {
 	// Then add the menu
 	var menu = game.add.sprite(w/2, h/2, 'menu');
 	menu.anchor.setTo(0.5, 0.5);
-	var endMessage = "GRADE: "+returnGrade();
+	var endMessage = "GRADE: "+returnGrade(score);
 	if (score < 60){
 		endMessage = endMessage+ "\nYOU FAILED!"; 
 	}
 	if (score == 100){
-		endMessage = endMessage+ "\AMAZING!";
+		endMessage = endMessage+ "\nAMAZING!";
 	}
 	
 	var endText = game.add.text(game.world.centerX, game.world.centerY, endMessage,{fill: '#fff' });
 	endText.anchor.setTo(0.5,0.5);
 
 	// And a label to illustrate which menu item was chosen. (This is not necessary)
-	var choiseLabel = game.add.text(game.world.centerX, game.world.centerY + menu.height/2+30, 'Click here to restart', {fill: '#fff' });
+	var choiseLabel = game.add.text(game.world.centerX, game.world.centerY + menu.height/2+30, 'Click here to restart', {fill: '#000000' });
 	choiseLabel.anchor.setTo(0.5, 0.5);
 
 	
