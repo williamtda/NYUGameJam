@@ -1,3 +1,4 @@
+
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
@@ -9,6 +10,7 @@ function preload() {
 	game.load.image('test','assets/test.png');
 	 game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);
 	 game.load.image('school', 'assets/school.png');
+	 game.load.image('menu', 'assets/blackbox.png', 360, 200);
 	 
 	//add sound
 	game.load.audio('music', 'assets/audio/How_It_Began.mp3'); 
@@ -105,15 +107,57 @@ function create() {
 
     game.time.events.add(Phaser.Timer.SECOND * 15, halfTime, this);
 	
-	//  AT 29 SECONDS
-	game.time.events.add(Phaser.Timer.SECOND * 29, createTest, this);
+	//  AT 30 SECONDS
+	game.time.events.add(Phaser.Timer.SECOND * 30, createTest, this);
+	
+	//  AT 35 SECONDS
+	game.time.events.add(Phaser.Timer.SECOND * 35, endGame, this); // Testing purposes only
+}
+
+function returnGrade(score){
+	if (score >= 90){
+		return "A";
+	} else if (score >= 80){
+		return "B";
+	} else if (score >= 70){
+		return "C";
+	} else if (score >= 60){
+		return "D";
+	} else {
+		return "F";
+	}
 }
 
 function restartMusic() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
+
+
+
 	sound.restart();
 	
+
+
+
+
+
 }
+
 function update() {
 
     //  Collide the player and the homework with the platforms
@@ -161,6 +205,8 @@ function update() {
     }
 
 }
+
+
 
 function createHomework() {
 	try {
@@ -247,4 +293,36 @@ function collectTest (player, aTest) {
     score += 20;
     scoreText.text = 'Score: ' + score;
 
+}
+
+function endGame() {
+	// When the pause button is pressed, we pause the game
+    game.paused = true;
+	var w = game.world.width;
+	var h = game.world.height;
+
+	// Then add the menu
+	var menu = game.add.sprite(w/2, h/2, 'menu');
+	menu.anchor.setTo(0.5, 0.5);
+	var endMessage = "GRADE: "+returnGrade(score);
+	if (score < 60){
+		endMessage = endMessage+ "\nYOU FAILED!"; 
+	}
+	if (score == 100){
+		endMessage = endMessage+ "\nAMAZING!";
+	}
+	
+	var endText = game.add.text(game.world.centerX, game.world.centerY, endMessage,{fill: '#fff' });
+	endText.anchor.setTo(0.5,0.5);
+
+	// And a label to illustrate which menu item was chosen. (This is not necessary)
+	var choiseLabel = game.add.text(game.world.centerX, game.world.centerY + menu.height/2+30, 'Click here to restart', {fill: '#000000' });
+	choiseLabel.anchor.setTo(0.5, 0.5);
+
+	
+	// Add a input listener that can help us return from being paused
+    game.input.onDown.add(restart, self);
+	function restart(event){
+		location.reload();
+	}
 }

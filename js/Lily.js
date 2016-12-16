@@ -8,8 +8,13 @@ function preload() {
     game.load.image('homework', 'assets/homework.png');
    // game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32, 4);
 	game.load.image('test','assets/test.png');
-	game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);	 
-	game.load.image('menu', 'assets/blackbox.png', 360, 200);
+	 game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);
+	 game.load.image('school', 'assets/school.png');
+	 game.load.image('menu', 'assets/blackbox.png', 360, 200);
+	 
+	//add sound
+	game.load.audio('music', 'assets/audio/How_It_Began.mp3'); 
+
 }
 
 var player;
@@ -23,12 +28,23 @@ var scoreText;
 //CHANGE
 var aTest;
 
+//add sound
+var sound;
+
 function create() {
-    //  We're going to be using physics, so enable the Arcade Physics system
+
+    //add sound
+	game.input.touch.preventDefault = false;
+	sound = game.add.audio('music');
+	sound.play();
+	game.input.onDown.add(restartMusic, this);
+	
+	//  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //  A simple background for our game
     game.add.sprite(0, 0, 'sky');
+	school = game.add.tileSprite(0, 0, 800, 600, 'school');
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
@@ -91,10 +107,11 @@ function create() {
 
     game.time.events.add(Phaser.Timer.SECOND * 15, halfTime, this);
 	
-	//  AT 29 SECONDS
-	game.time.events.add(Phaser.Timer.SECOND * 29, createTest, this);
+	//  AT 30 SECONDS
+	game.time.events.add(Phaser.Timer.SECOND * 30, createTest, this);
 	
-	game.time.events.add(Phaser.Timer.SECOND * 30, endGame, this); // Testing purposes only
+	//  AT 35 SECONDS
+	game.time.events.add(Phaser.Timer.SECOND * 35, endGame, this); // Testing purposes only
 }
 
 function returnGrade(score){
@@ -111,33 +128,34 @@ function returnGrade(score){
 	}
 }
 
-function endGame() {
-	// When the pause button is pressed, we pause the game
-    game.paused = true;
-	var w = game.world.width;
-	var h = game.world.height;
+function restartMusic() {
 
-	// Then add the menu
-	var menu = game.add.sprite(w/2, h/2, 'menu');
-	menu.anchor.setTo(0.5, 0.5);
-	var endMessage = "GRADE: "+returnGrade();
-	if (score < 60){
-		endMessage = endMessage+ "\nYOU FAILED!"; 
-	} else if (score == 100){
-		endMessage = endMessage+ "\AMAZING!";
-	}
-	var endText = game.add.text(game.world.centerX, game.world.centerY, endMessage,{fill: '#fff' });
-	endText.anchor.setTo(0.5,0.5);
 
-	// And a label to illustrate which menu item was chosen. (This is not necessary)
-	var choiseLabel = game.add.text(game.world.centerX, game.world.centerY + menu.height/2+30, 'Click here to restart', {fill: '#fff' });
-	choiseLabel.anchor.setTo(0.5, 0.5);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
-	// Add a input listener that can help us return from being paused
-    game.input.onDown.add(restart, self);
-	function restart(event){
-		location.reload();
-	}
+
+
+
+	sound.restart();
+	
+
+
+
+
+
 }
 
 function update() {
@@ -162,6 +180,7 @@ function update() {
         player.body.velocity.x = -150;
 
         player.animations.play('left');
+		school.tilePosition.x+= 5;
     }
     else if (cursors.right.isDown)
     {
@@ -169,6 +188,7 @@ function update() {
         player.body.velocity.x = 150;
 
         player.animations.play('right');
+		school.tilePosition.x-=5;
     }
     else
     {
@@ -185,6 +205,8 @@ function update() {
     }
 
 }
+
+
 
 function createHomework() {
 	try {
@@ -243,7 +265,10 @@ function halfTime(homework){
 
 function render() {
 
-    game.debug.text("Time until event: " + game.time.events.duration.toFixed(0), 32, 32);
+    //sound-related
+	game.debug.soundInfo(sound, 20, 32);
+	
+	game.debug.text("Time until event: " + game.time.events.duration.toFixed(0), 32, 32);
     game.debug.text("Next tick: " + game.time.events.next.toFixed(0), 32, 64);
 
 }
@@ -268,4 +293,36 @@ function collectTest (player, aTest) {
     score += 20;
     scoreText.text = 'Score: ' + score;
 
+}
+
+function endGame() {
+	// When the pause button is pressed, we pause the game
+    game.paused = true;
+	var w = game.world.width;
+	var h = game.world.height;
+
+	// Then add the menu
+	var menu = game.add.sprite(w/2, h/2, 'menu');
+	menu.anchor.setTo(0.5, 0.5);
+	var endMessage = "GRADE: "+returnGrade(score);
+	if (score < 60){
+		endMessage = endMessage+ "\nYOU FAILED!"; 
+	}
+	if (score == 100){
+		endMessage = endMessage+ "\nAMAZING!";
+	}
+	
+	var endText = game.add.text(game.world.centerX, game.world.centerY, endMessage,{fill: '#fff' });
+	endText.anchor.setTo(0.5,0.5);
+
+	// And a label to illustrate which menu item was chosen. (This is not necessary)
+	var choiseLabel = game.add.text(game.world.centerX, game.world.centerY + menu.height/2+30, 'Click here to restart', {fill: '#000000' });
+	choiseLabel.anchor.setTo(0.5, 0.5);
+
+	
+	// Add a input listener that can help us return from being paused
+    game.input.onDown.add(restart, self);
+	function restart(event){
+		location.reload();
+	}
 }
