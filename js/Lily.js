@@ -1,3 +1,4 @@
+
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
@@ -7,9 +8,9 @@ function preload() {
     game.load.image('homework', 'assets/homework.png');
    // game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32, 4);
 	game.load.image('test','assets/test.png');
-	 game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);
+	game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);
 	 
-	  game.load.image('menu', 'assets/blackbox.jpeg', 360, 360);
+	game.load.image('menu', 'assets/blackbox.jpeg', 360, 360);
 
 }
 
@@ -102,6 +103,8 @@ function create() {
 function endGame() {
 	// When the pause button is pressed, we pause the game
         game.paused = true;
+		var w = game.world.width;
+		var h = game.world.height;
 
         // Then add the menu
         var menu = game.add.sprite(w/2, h/2, 'menu');
