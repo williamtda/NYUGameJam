@@ -1,6 +1,22 @@
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
+//  The Google WebFont Loader will look for this object, so create it before loading the script.
+WebFontConfig = {
+
+    //  'active' means all requested fonts have finished loading
+    //  We set a 1 second delay before calling 'createText'.
+    //  For some reason if we don't the browser cannot render the text the first time it's created.
+    active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+
+    //  The Google Fonts we want to load (specify as many as you like in the array)
+    google: {
+      families: ['Space Mono',monospace]
+    }
+
+};
+
+
 function preload() {
 
     game.load.image('sky', 'assets/sky.png');
@@ -8,10 +24,11 @@ function preload() {
     game.load.image('homework', 'assets/homework.png');
    // game.load.spritesheet('baddie', 'assets/baddie.png', 32, 32, 4);
 	game.load.image('test','assets/test.png');
-	game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);
-	 
+	game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);	 
 	game.load.image('menu', 'assets/blackbox.jpeg', 360, 360);
 
+	//  Load the Google WebFont Loader script
+    game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 }
 
 var player;
@@ -111,13 +128,13 @@ function endGame() {
 	menu.anchor.setTo(0.5, 0.5);
 	var endMessage = "GRADE:"+score;
 	if (score < 60){
-		endMessage = endMessage+ " FAIL!!"; 
+		endMessage = endMessage+ "YOU FAILED!"; 
 	}
-	var endText = game.add.text(w/2, h/2, endMessage,{ font: '30px Arial', fill: '#fff' });
-	
+	var endText = game.add.text(game.world.centerX, game.world.centerY, endMessage,{ font: '30px \'Space Mono\'', fill: '#fff' });
+	endText.anchor.setTo(0.5,0.5);
 
 	// And a label to illustrate which menu item was chosen. (This is not necessary)
-	var choiseLabel = game.add.text(w/2, h-150, 'Click here to restart', { font: '30px Arial', fill: '#fff' });
+	var choiseLabel = game.add.text(game.world.centerX, game.world.centerY + menu.height/2+50, 'Click here to restart', { font: '30px \'Space Mono\'', fill: '#fff' });
 	//choiseLabel.anchor.setTo(0.5, 0.5);
 	
 	// Add a input listener that can help us return from being paused
@@ -136,11 +153,6 @@ function endGame() {
                 ;
             }
             else{
-                // Remove the menu and the label
-                menu.destroy();
-
-                // Unpause the game
-                game.paused = false;
 				location.reload();
             }
         }
