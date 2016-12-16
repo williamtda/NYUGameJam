@@ -140,7 +140,9 @@ function update() {
 
     //  Collide the player and the homework with the platforms
     game.physics.arcade.collide(player, platforms);
-    game.physics.arcade.collide(homework, platforms);
+    if (game.physics.arcade.collide(homework, platforms)){
+		homework.value = 10;
+	}
 
     //  Checks to see if the player overlaps with any of the homeworks, if he does call the collecthomework function
     game.physics.arcade.overlap(player, homework, collectHomework, null, this);
@@ -243,6 +245,7 @@ function createHomework() {
 	var homeworkFall = Math.random()*10*70 + 1; // Falls between 70 and width - 70 px
 	// The player and its settings
     homework = game.add.sprite(homeworkFall, 0, 'homework');
+	homework.points = 15;
 
     //  We need to enable physics on the player
     game.physics.arcade.enable(homework);
@@ -254,6 +257,7 @@ function createHomework() {
 function createTest() {
 	try {
 		aTest.kill();
+		homework.kill();
 	} catch (err){
 		
 	}
@@ -304,7 +308,7 @@ function collectHomework (player, homework) {
     homework.kill();
 
     //  Add and update the score
-    score += 15;
+    score += homework.points;
     scoreText.text = 'Score: ' + score;
 
 }
