@@ -165,7 +165,7 @@ function updateSuperPlayer() {
 	if (cursors.left.isDown)
     {
         //  Move to the left
-        player.body.velocity.x = -200;
+        player.body.velocity.x = -250;
 
         player.animations.play('left');
 		school.tilePosition.x+= 5;
@@ -173,7 +173,7 @@ function updateSuperPlayer() {
     else if (cursors.right.isDown)
     {
         //  Move to the right
-        player.body.velocity.x = 200;
+        player.body.velocity.x = 250;
 
         player.animations.play('right');
 		school.tilePosition.x-=5;
@@ -189,11 +189,11 @@ function updateSuperPlayer() {
     //  Allow the player to jump
     if (cursors.up.isDown)
     {
-        player.body.velocity.y = -400;
+        player.body.velocity.y = -300;
     }
 	else if (cursors.down.isDown)
 	{
-		player.body.velocity.y = 100;
+		player.body.velocity.y = 400;
 	}
 }
 
