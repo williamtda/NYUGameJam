@@ -18,8 +18,7 @@ function preload() {
 }
 
 var superMode = false;
-var superKey = "Z";
-var key;
+var superKey;
 
 var player;
 var platforms;
@@ -36,7 +35,7 @@ var aTest;
 var sound;
 
 function create() {
-	key = game.input.keyboard.addKey(Phaser.Keyboard.superKey);
+	superKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
 
     //add sound
 	game.input.touch.preventDefault = false;
@@ -149,7 +148,7 @@ function update() {
 	// CHANGE: tests
 	game.physics.arcade.overlap(player, aTest, collectTest, null, this);
 
-	if (cursors.key.isDown){
+	if (superKey.isDown){
 		superMode = true;
 	}
 	
