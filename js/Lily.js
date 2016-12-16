@@ -6,7 +6,7 @@ var wfconfig = {
     },
  
     google: {
-        families: ['Sniglet']
+        families: ['Space Mono']
     }
  
 };
@@ -46,9 +46,6 @@ function preload() {
 	game.load.image('test','assets/test.png');
 	game.load.spritesheet('betty', 'assets/betty.png', 48, 48, 16);	 
 	game.load.image('menu', 'assets/blackbox.jpeg', 360, 360);
-
-	//  Load the Google WebFont Loader script
-    game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 }
 
 var player;
