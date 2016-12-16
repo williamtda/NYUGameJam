@@ -191,6 +191,10 @@ function updateSuperPlayer() {
     {
         player.body.velocity.y = -400;
     }
+	else if (cursors.down.isDown)
+	{
+		player.body.velocity.y = 100;
+	}
 }
 
 function updatePlayer() {
