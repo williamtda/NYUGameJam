@@ -11,7 +11,7 @@ WebFontConfig = {
 
     //  The Google Fonts we want to load (specify as many as you like in the array)
     google: {
-      families: ['Space Mono',monospace]
+      families: ['Space Mono']
     }
 
 };
@@ -126,37 +126,19 @@ function endGame() {
 	// Then add the menu
 	var menu = game.add.sprite(w/2, h/2, 'menu');
 	menu.anchor.setTo(0.5, 0.5);
-	var endMessage = "GRADE:"+score;
+	var endMessage = "GRADE: "+score;
 	if (score < 60){
-		endMessage = endMessage+ "YOU FAILED!"; 
+		endMessage = endMessage+ " YOU FAILED!"; 
 	}
-	var endText = game.add.text(game.world.centerX, game.world.centerY, endMessage,{ font: '30px \'Space Mono\'', fill: '#fff' });
+	var endText = game.add.text(game.world.centerX, game.world.centerY, endMessage,{fill: '#fff' });
 	endText.anchor.setTo(0.5,0.5);
 
 	// And a label to illustrate which menu item was chosen. (This is not necessary)
-	var choiseLabel = game.add.text(game.world.centerX, game.world.centerY + menu.height/2+50, 'Click here to restart', { font: '30px \'Space Mono\'', fill: '#fff' });
-	//choiseLabel.anchor.setTo(0.5, 0.5);
+	var choiseLabel = game.add.text(game.world.centerX, game.world.centerY + menu.height/2+10, 'Click here to restart', {fill: '#fff' });
+	choiseLabel.anchor.setTo(0.5, 0.5);
 	
 	// Add a input listener that can help us return from being paused
-    game.input.onDown.add(restart, self);
-
-    // And finally the method that handels the pause menu
-    function restart(event){
-        // Only act if paused
-        if(game.paused){
-            // Calculate the corners of the menu
-            var x1 = w/2 - menu.width/2, x2 = w/2 + menu.width/2,
-                y1 = h/2 - menu.height/2, y2 = h/2 + menu.width/2;
-
-            // Check if the click was inside the menu
-            if(event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2 ){
-                ;
-            }
-            else{
-				location.reload();
-            }
-        }
-    };
+    game.input.onDown.add(location.reload(), self);
 }
 
 function update() {
