@@ -281,9 +281,11 @@ function endGame() {
 	var endMessage = "GRADE: "+returnGrade();
 	if (score < 60){
 		endMessage = endMessage+ "\nYOU FAILED!"; 
-	} else if (score == 100){
+	}
+	if (score == 100){
 		endMessage = endMessage+ "\AMAZING!";
 	}
+	
 	var endText = game.add.text(game.world.centerX, game.world.centerY, endMessage,{fill: '#fff' });
 	endText.anchor.setTo(0.5,0.5);
 
