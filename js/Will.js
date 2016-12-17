@@ -1,5 +1,5 @@
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'Survive School', { preload: preload, create: create, update: update });
 
 function preload() {
 
@@ -36,8 +36,8 @@ var sound;
 
 //Timer
 var timer;
-var timeLeft = 33;
-var timerText;
+var timeLeft = 0;
+var timerText = 0;
 
 function create() {
 	superKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
@@ -99,7 +99,7 @@ function create() {
 	
 	//The Time left
 	timerText = game.add.text(600, 16, 'Time left: 33', { fontSize: '32px', fill: '#000' });
-	game.time.events.repeat(Phaser.Timer.SECOND * 1, 33, updateTimer, this);
+	game.time.events.loop(Phaser.Timer.SECOND, updateTimer, this);
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
@@ -147,8 +147,8 @@ function restartMusic() {
 
 function updateTimer() {
 
-    timeLeft--;
-	timerText.setText('Time Left: ' + timeLeft);
+    timeLeft++;
+	timerText.setText('Time: ' + timeLeft);
 
 }
 
