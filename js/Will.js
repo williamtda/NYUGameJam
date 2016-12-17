@@ -36,7 +36,7 @@ var sound;
 
 //Timer
 var timer;
-var timeLeft = 0;
+var timeLeft = 33;
 var timerText = 0;
 
 function create() {
@@ -99,7 +99,10 @@ function create() {
 	
 	//The Time left
 	timerText = game.add.text(600, 16, 'Time: 0', { fontSize: '32px', fill: '#000' });
-	timer = game.time.events.loop(1000, updateTimer, this);
+	timer = game.time.create(false);
+	timer.add(1000, updateTimer, this);
+	timer.start();
+	
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
@@ -112,18 +115,18 @@ function create() {
     //  Once the event has been called 2 times it will never be called again.
 
     game.time.events.repeat(1000 * 5, 2, createHomework, this);
-	timer = game.time.events.loop(1000, updateTimer, this);
+	
 	//  AT 15 SECOND MARK
 	//  Here we'll create a basic timed event. This is a one-off event, it won't repeat or loop:
     //  The first parameter is how long to wait before the event fires. In this case 15 seconds 
     //  The next parameter is the function to call ('halfTime') and finally the context under which that will happen.
 
     game.time.events.add(1000 * 15, halfTime, this);
-	timer = game.time.events.loop(1000, updateTimer, this);
+	
 	//  AT 30 SECONDS
 	game.time.events.add(1000 * 30, createTest, this);
-	timer = game.time.events.loop(1000, updateTimer, this);
-	//  AT 33 SECONDS?
+	
+	//  AT 33 SECONDS
 	game.time.events.add(1000 * 33, endGame, this); // Testing purposes only
 }
 
@@ -147,7 +150,7 @@ function restartMusic() {
 
 function updateTimer() {
 
-    timeLeft++;
+    timeLeft--;
 	timerText.setText('Time: ' + timeLeft);
 
 }
@@ -205,7 +208,7 @@ function updateSuperPlayer() {
     }
     
     //  Allow the player to jump
-    if (cursors.up.isDown)
+    if (cursors.up.isDown && player.body.touching.down)
     {
         player.body.velocity.y = -300;
     }
@@ -313,6 +316,7 @@ function render() {
     //sound-related
 	game.debug.soundInfo(sound, 20, 32);
 	
+
 	game.debug.text("Time until event: " + game.time.events.duration.toFixed(0), 32, 32);
     game.debug.text("Next tick: " + game.time.events.next.toFixed(0), 32, 64);
 
