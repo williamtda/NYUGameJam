@@ -107,7 +107,7 @@ function create() {
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
 	
-	
+	timer.events.repeat(1000, 32, updateTimer, this);
 	//  The first parameter is how long to wait before the event fires. In this case 5 seconds (you could pass in 2000 as the value as well.)
     //  The second parameter is how many times the event will run in total. Here we'll run it 2 times.
     //  The next two parameters are the function to call ('createBall') and the context under which that will happen.
