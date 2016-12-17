@@ -48,11 +48,11 @@ function create() {
 	sound.play();
 	game.input.onDown.add(restartMusic, this);
 	
-	//add and configure the timer
-	timer = game.time.create(false);
-	timer.loop(1000, updateCounter, this);
-	 timer.start();
-	 game.time.events.loop(Phaser.Timer.SECOND, updateTimer, this);
+
+
+	
+
+	
 	
 	//  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -104,7 +104,8 @@ function create() {
     scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 	
 	//The Time left
-	timerText = game.add.text(760, 16, 'Time left: 33', { fontSize: '32px', fill: '#000' });
+	timerText = game.add.text(700, 16, 'Time left: 33', { fontSize: '32px', fill: '#000' });
+	game.time.events.loop(Phaser.Timer.SECOND, updateTimer, this);
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
@@ -150,7 +151,7 @@ function restartMusic() {
 	sound.restart();
 }
 
-function updateCounter() {
+function updateTimer() {
 
     timeLeft--;
 	timerText.setText('Time Left: ' + timeLeft);
