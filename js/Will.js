@@ -98,7 +98,7 @@ function create() {
     scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 	
 	//The Time left
-	timerText = game.add.text(600, 16, 'Time: 0', { fontSize: '32px', fill: '#000' });
+	timerText = game.add.text(600, 16, 'Time Left: 33', { fontSize: '32px', fill: '#000' });
 	timer = game.time.create(false);
 	timer.loop(1000, updateTimer, this);
 	timer.start();
@@ -114,20 +114,20 @@ function create() {
 
     //  Once the event has been called 2 times it will never be called again.
 
-    game.time.events.repeat(1000 * 5, 2, createHomework, this);
+    game.time.events.repeat(Phaser.Timer.SECOND * 5, 2, createHomework, this);
 	
 	//  AT 15 SECOND MARK
 	//  Here we'll create a basic timed event. This is a one-off event, it won't repeat or loop:
     //  The first parameter is how long to wait before the event fires. In this case 15 seconds 
     //  The next parameter is the function to call ('halfTime') and finally the context under which that will happen.
 
-    game.time.events.add(1000 * 15, halfTime, this);
+    game.time.events.add(Phaser.Timer.SECOND * 15, halfTime, this);
 	
 	//  AT 30 SECONDS
-	game.time.events.add(1000 * 30, createTest, this);
+	game.time.events.add(Phaser.Timer.SECOND * 30, createTest, this);
 	
 	//  AT 33 SECONDS
-	game.time.events.add(1000 * 33, endGame, this); // Testing purposes only
+	game.time.events.add(Phaser.Timer.SECOND * 33, endGame, this); // Testing purposes only
 }
 
 function returnGrade(score){
@@ -208,7 +208,7 @@ function updateSuperPlayer() {
     }
     
     //  Allow the player to jump
-    if (cursors.up.isDown && player.body.touching.down)
+    if (cursors.up.isDown)
     {
         player.body.velocity.y = -300;
     }
@@ -308,7 +308,7 @@ function createTest() {
 function halfTime(homework){
 	
 	createTest();
-	game.time.events.repeat(1000 * 5, 2, createHomework, this);
+	game.time.events.repeat(Phaser.Timer.SECOND * 5, 2, createHomework, this);
 }
 
 function render() {
