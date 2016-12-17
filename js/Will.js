@@ -98,7 +98,7 @@ function create() {
     scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 	
 	//The Time left
-	timerText = game.add.text(600, 16, 'Time left: 33', { fontSize: '32px', fill: '#000' });
+	timerText = game.add.text(600, 16, 'Time: 0', { fontSize: '32px', fill: '#000' });
 	timer = game.time.events.loop(1000, updateTimer, this);
 
     //  Our controls.
@@ -112,17 +112,17 @@ function create() {
     //  Once the event has been called 2 times it will never be called again.
 
     game.time.events.repeat(1000 * 5, 2, createHomework, this);
-	
+	timer = game.time.events.loop(1000, updateTimer, this);
 	//  AT 15 SECOND MARK
 	//  Here we'll create a basic timed event. This is a one-off event, it won't repeat or loop:
     //  The first parameter is how long to wait before the event fires. In this case 15 seconds 
     //  The next parameter is the function to call ('halfTime') and finally the context under which that will happen.
 
     game.time.events.add(1000 * 15, halfTime, this);
-	
+	timer = game.time.events.loop(1000, updateTimer, this);
 	//  AT 30 SECONDS
 	game.time.events.add(1000 * 30, createTest, this);
-	
+	timer = game.time.events.loop(1000, updateTimer, this);
 	//  AT 33 SECONDS?
 	game.time.events.add(1000 * 33, endGame, this); // Testing purposes only
 }
