@@ -36,7 +36,7 @@ var sound;
 
 //Timer
 var timer;
-var timeLeft = 33;
+var timeLeft = 32;
 var timerText = 0;
 
 function create() {
@@ -98,7 +98,7 @@ function create() {
     scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 	
 	//The Time left
-	timerText = game.add.text(600, 16, 'Time Left: 33', { fontSize: '32px', fill: '#000' });
+	timerText = game.add.text(650, 16, 'Time Left: 33', { fontSize: '32px', fill: '#000' });
 	timer = game.time.create(false);
 	timer.loop(1000, updateTimer, this);
 	timer.start();
