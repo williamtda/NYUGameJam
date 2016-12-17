@@ -105,7 +105,7 @@ function create() {
 	
 	//The Time left
 	timerText = game.add.text(600, 16, 'Time left: 33', { fontSize: '32px', fill: '#000' });
-	game.time.events.loop(Phaser.Timer.1000, updateTimer, this);
+	game.time.events.loop(Phaser.Timer.SECOND*1, updateTimer, this);
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
