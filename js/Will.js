@@ -98,7 +98,7 @@ function create() {
     scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
 	
 	//The Time left
-	timerText = game.add.text(670, 13, 'Time: 33', { fontSize: '32px', fill: '#000' });
+	timerText = game.add.text(670, 13, 'Time: 32', { fontSize: '32px', fill: '#000' });
 	timer = game.time.create(false);
 	timer.loop(1000, updateTimer, this);
 	timer.start();
