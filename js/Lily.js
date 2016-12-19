@@ -1,5 +1,5 @@
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'Survive School', { preload: preload, create: create, update: update });
 
 function preload() {
 
@@ -19,7 +19,6 @@ function preload() {
 
 var superMode = false;
 var superKey;
-
 var player;
 var platforms;
 var cursors;
@@ -34,6 +33,11 @@ var aTest;
 //add sound
 var sound;
 
+//Timer
+var timer;
+var timeLeft = 32;
+var timerText = 0;
+
 function create() {
 	superKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
 
@@ -42,7 +46,7 @@ function create() {
 	sound = game.add.audio('music');
 	sound.play();
 	game.input.onDown.add(restartMusic, this);
-	
+		
 	//  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -91,6 +95,13 @@ function create() {
 
     //  The score
     scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+	
+	//The Time left
+	timerText = game.add.text(670, 13, 'Time: 32', { fontSize: '32px', fill: '#000' });
+	timer = game.time.create(false);
+	timer.loop(1000, updateTimer, this);
+	timer.start();
+	
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
@@ -106,7 +117,7 @@ function create() {
 	
 	//  AT 15 SECOND MARK
 	//  Here we'll create a basic timed event. This is a one-off event, it won't repeat or loop:
-    //  The first parameter is how long to wait before the event fires. In this case 15 seconds (you could pass in 4000 as the value as well.)
+    //  The first parameter is how long to wait before the event fires. In this case 15 seconds 
     //  The next parameter is the function to call ('halfTime') and finally the context under which that will happen.
 
     game.time.events.add(Phaser.Timer.SECOND * 15, halfTime, this);
@@ -114,7 +125,7 @@ function create() {
 	//  AT 30 SECONDS
 	game.time.events.add(Phaser.Timer.SECOND * 30, createTest, this);
 	
-	//  AT 35 SECONDS
+	//  AT 33 SECONDS
 	game.time.events.add(Phaser.Timer.SECOND * 33, endGame, this); // Testing purposes only
 }
 
@@ -133,7 +144,37 @@ function returnGrade(score){
 }
 
 function restartMusic() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	sound.restart();
+}
+
+function updateTimer() {
+
+    timeLeft--;
+	timerText.setText('Time: ' + timeLeft);
+
+
+
+
 }
 
 function update() {
@@ -232,7 +273,9 @@ function updatePlayer() {
     {
         player.body.velocity.y = -350;
     }
+
 }
+
 
 
 function createHomework() {
@@ -247,7 +290,7 @@ function createHomework() {
     homework = game.add.sprite(homeworkFall, 0, 'homework');
 	homework.points = 15;
 
-    //  We need to enable physics on the player
+    //  We need to enable physics on the homework
     game.physics.arcade.enable(homework);
 	
 	homework.body.gravity.y = 300;
@@ -266,7 +309,7 @@ function createTest() {
 	// The player and its settings
     aTest = game.add.sprite(testFall, 0, 'test');
 
-    //  We need to enable physics on the player
+    //  We need to enable physics on the test
     game.physics.arcade.enable(aTest);
 	
 	aTest.body.gravity.y = 300;
@@ -297,6 +340,7 @@ function render() {
     //sound-related
 	game.debug.soundInfo(sound, 20, 32);
 	
+
 	game.debug.text("Time until event: " + game.time.events.duration.toFixed(0), 32, 32);
     game.debug.text("Next tick: " + game.time.events.next.toFixed(0), 32, 64);
 
@@ -309,6 +353,7 @@ function collectHomework (player, homework) {
 
     //  Add and update the score
     score += homework.points;
+
     scoreText.text = 'Score: ' + score;
 
 }
@@ -340,7 +385,10 @@ function endGame() {
 	if (score == 100){
 		endMessage = endMessage+ "\nAMAZING!";
 	}
-	
+	else{
+		endMessage = endMessage+ "\nTHANKS FOR PLAYING!";
+	}
+
 	var endText = game.add.text(game.world.centerX, game.world.centerY, endMessage,{fill: '#fff' });
 	endText.anchor.setTo(0.5,0.5);
 
