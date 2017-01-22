@@ -14,7 +14,7 @@ function preload() {
 	 
 	//add sound
 	game.load.audio('music', 'assets/audio/How_It_Began.mp3'); 
-
+	game.load.
 }
 
 var superMode = false;
@@ -42,11 +42,11 @@ function create() {
 	superKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
 
     //add sound
-	game.input.touch.preventDefault = false;
-	sound = game.add.audio('music');
+	sound = game.add.audio('music', 1, true);
+	dramaticSound = game.add.audio('dramatic', 1, true);
 	sound.play();
-	game.input.onDown.add(restartMusic, this);
-		
+	sound.onStop.add(playbackDramatic);	
+	
 	//  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -143,38 +143,10 @@ function returnGrade(score){
 	}
 }
 
-function restartMusic() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	sound.restart();
-}
-
 function updateTimer() {
 
     timeLeft--;
 	timerText.setText('Time: ' + timeLeft);
-
-
-
-
 }
 
 function update() {
@@ -304,7 +276,14 @@ function createTest() {
 	} catch (err){
 		
 	}
-
+	if (sound.isPlaying)
+	{	
+		sound.stop();
+	}
+	else 
+	{
+		dramaticSound.resume();
+	}
 	var testFall = Math.random()*10*70 + 1; // Falls between 70 and width - 70 px
 	// The player and its settings
     aTest = game.add.sprite(testFall, 0, 'test');
@@ -336,10 +315,6 @@ function halfTime(homework){
 }
 
 function render() {
-
-    //sound-related
-	game.debug.soundInfo(sound, 20, 32);
-	
 
 	game.debug.text("Time until event: " + game.time.events.duration.toFixed(0), 32, 32);
     game.debug.text("Next tick: " + game.time.events.next.toFixed(0), 32, 64);
@@ -402,4 +377,7 @@ function endGame() {
 	function restart(event){
 		location.reload();
 	}
+}
+function playbackDramatic() {
+	dramaticSound.play();
 }
