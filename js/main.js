@@ -14,7 +14,7 @@ function preload() {
 	 
 	//add sound
 	game.load.audio('music', 'assets/audio/How_It_Began.mp3'); 
-	game.load.
+	game.load.audio('dramatic', 'assets/audio/18s-dramatic.mp3');
 }
 
 var superMode = false;
